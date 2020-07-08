@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 export interface Message {
   fromName: string;
   subject: string;
@@ -7,11 +8,19 @@ export interface Message {
   id: number;
   read: boolean;
 }
-
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  type: string;
+}
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  private url = 'https://192.168.150.1:45455/api';
+  public products: Product[];
   public messages: Message[] = [
     {
       fromName: 'Matt Chorsey',
@@ -71,7 +80,7 @@ export class DataService {
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   public getMessages(): Message[] {
     return this.messages;
@@ -79,5 +88,24 @@ export class DataService {
 
   public getMessageById(id: number): Message {
     return this.messages[id];
+  }
+
+  public getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.url + '/Products');
+  }
+  public getProductById(id: number): Observable<Product> {
+  return this.http.get<Product>(this.url + '/Products' + '/' + id);
+  }
+  public createProduct(product: Product){
+    return this.http.post(this.url + '/Products', product, { responseType: 'text' }).subscribe(
+      error => console.error(error));
+  }
+  public updateProduct(product: Product){
+    return this.http.put(this.url + '/Products' + '/' + product.id, product , { responseType: 'text' }).subscribe(
+      error => console.error(error));
+  }
+  public deleteProductById(id: number){
+    return this.http.delete(this.url + '/Products' + '/' + id, { responseType: 'text' }).subscribe(
+      error => console.error(error));
   }
 }

@@ -1,3 +1,4 @@
+import { Product } from './../services/data.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Message } from '../services/data.service';
 
@@ -8,6 +9,7 @@ import { Message } from '../services/data.service';
 })
 export class MessageComponent implements OnInit {
   @Input() message: Message;
+  @Input() product: Product;
 
   constructor() { }
 

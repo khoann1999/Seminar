@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      Products
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,12 +14,15 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-        Inbox
+        Products
       </ion-title>
     </ion-toolbar>
   </ion-header>
   
-  <ion-list>
+  <!-- <ion-list>
     <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
+  </ion-list> -->
+  <ion-list>
+    <app-message *ngFor="let product of products" [product]="product"></app-message>
   </ion-list>
 </ion-content>
