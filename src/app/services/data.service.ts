@@ -19,7 +19,7 @@ export interface Product {
   providedIn: 'root'
 })
 export class DataService {
-  private url = 'https://192.168.150.1:45455/api';
+  private url = 'https://ionicdemo.conveyor.cloud//api';
   public products: Product[];
   public messages: Message[] = [
     {
